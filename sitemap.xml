@@ -9,7 +9,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/2020/10/22/Test/</loc>
+    <loc>http://example.com/categories/index.html</loc>
     
     <lastmod>2020-10-21</lastmod>
     
@@ -24,13 +24,6 @@
   
   <url>
     <loc>http://example.com/about/index.html</loc>
-    
-    <lastmod>2020-10-21</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://example.com/categories/index.html</loc>
     
     <lastmod>2020-10-21</lastmod>
     
@@ -53,19 +46,19 @@
 
   
   <url>
-    <loc>http://example.com/tags/Testing/</loc>
-    <lastmod>2020-10-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Another-Tag/</loc>
+    <loc>http://example.com/tags/Testing-in-Tags/</loc>
     <lastmod>2020-10-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
 
+  
+  <url>
+    <loc>http://example.com/categories/Testing-in-Categories/</loc>
+    <lastmod>2020-10-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>
