@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>Auto-Traffic-Analysis</title>
+      <link href="/2022/04/06/Auto-Traffic-Analysis/"/>
+      <url>/2022/04/06/Auto-Traffic-Analysis/</url>
+      
+        <content type="html"><![CDATA[<h2 id="New-Directions-in-Automated-Traffic-Analysis论文学习"><a href="#New-Directions-in-Automated-Traffic-Analysis论文学习" class="headerlink" title="New Directions in Automated Traffic Analysis论文学习"></a>New Directions in Automated Traffic Analysis论文学习</h2><blockquote><p>论文链接：<a href="https://dl.acm.org/doi/10.1145/3460120.3484758">New Directions in Automated Traffic Analysis | Proceedings of the 2021 ACM SIGSAC Conference on Computer and Communications Security</a></p></blockquote><h3 id="文章主要信息"><a href="#文章主要信息" class="headerlink" title="文章主要信息"></a>文章主要信息</h3><table><thead><tr><th>论文名称</th><th align="center">New Directions in Automated Traffic Analysis</th></tr></thead><tbody><tr><td>录用信息</td><td align="center">CCS 2021（CCF-A）</td></tr><tr><td>作者</td><td align="center"><a href="https://www.cs.princeton.edu/~jordanah/"> Jordan Holland</a>, Paul Schmitt, Nick Feamster, Prateek Mittal</td></tr><tr><td>论文链接</td><td align="center"><a href="https://dl.acm.org/doi/10.1145/3460120.3484758">https://dl.acm.org/doi/10.1145/3460120.3484758</a></td></tr><tr><td>源码</td><td align="center"><a href="https://github.com/nprint/nprint"> https://github.com/nprint/nprint</a></td></tr><tr><td>数据集</td><td align="center"><a href="https://drive.google.com/drive/folders/158Lwb9TwopIJ0lGPuFik5744qPiqrg9F">https://drive.google.com/drive/folders/158Lwb9TwopIJ0lGPuFik5744qPiqrg9F</a></td></tr></tbody></table><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>目前,机器学习技术被广泛应用于入侵检测、应用程序识别等网络流量分析任务中。但是，当我们使用机器学习方法时，特征提取、模型选择、参数调优等众多因素决定着模型的性能，每当面对不同的网络流量或新的任务，就需要研究人员重新考虑调整这些选项甚至重新建模，这个调整甚至是重建的过程往往需要大量人力成本和专业知识。并且，流量模式会不断的发生变化，使得模型和人工提取的特征过时。因此有必要为不同网络流量创建一个通用的表示，可以用于各种不同的模型，跨越广泛的问题类，并将整个建模过程自动化。该文关注通用的自动化网络流量分析问题，致力于使研究人员将更多的精力用于优化模型和特征上，并有更多的时间在实践中解释和部署最佳模型。</p><h3 id="自动化网络流量分析"><a href="#自动化网络流量分析" class="headerlink" title="自动化网络流量分析"></a>自动化网络流量分析</h3><p>本文提出一种自动化流量分析方法（nPrintML），使机器学习技术更容易应用于更广泛的流量分析任务。nPrintML 包含 nPrint 流量表示和 AutoML 两部分，首先 nPrint 通过对 IP 数据包头进行对齐和拼接形成统一的数据表征，然后使用 AutoGluon-Tabular 框架进行自动化的进行特征提取、模型搜索和超参数优化。作者在 8 个不同的流量分析任务上对 nPrintML 进行评估，都取得了很好的效果。</p><h4 id="数据表示-nPrint"><a href="#数据表示-nPrint" class="headerlink" title="数据表示 nPrint"></a>数据表示 nPrint</h4><p>对于流量分类问题，数据表示与模型选择同等重要，所以在应用机器学习方法时，如何对数据进行表示和编码是非常重要的一环。对于网络流量数据的编码需要满足以下4个要求：</p><ul><li>完整的表示。我们的目标不是选择特定的特征，而是一种统一的数据编码，以避免依赖专家知识，所以需要保留包含包头在内的所有数据包信息；</li><li>固定的大小。许多机器学习模型的输入总是保持相同的大小，所以每个数据包表示都必须是常量大小；</li><li>固有的规范化。当特征被归一化后，机器学习模型通常会表现得更好，也能减少训练时间并增加模型的稳定性，所以如果数据的初始表示本身就是规范化的，将会非常方便；</li><li>一致的表示。数据表示的每个位置都应该对应于所有数据包包头的相同部分，也就是说，即使协议和报文长度不同，特定的特征总是在数据包中具有相同的偏移量，对齐后的数据都能让模型基于这样的前提来学习特征表示。</li></ul><p>首先，来看一下传统的流量数据包头。</p><p><img src="https://s2.loli.net/2022/04/06/jIkEbltCHMYh9sR.png" alt="1.png"></p><p>​                                                      图1 语义表示法和朴素二进制表示法</p><p>如图1所示，网络流量表示的主要方式包括语义表示法和朴素二进制表示法。</p><ul><li>语义表示法：每个报头都有各自的语义字段，但它不保留具有区分度的可选字段的顺序，同时需要领域专业知识来解析每个协议的语义结构，即使拥有这些知识，后续也还是不可避免进行繁琐的特征工程；</li><li>朴素二进制表示法：使用数据包的原始位图表示来保持顺序，但是忽略了不同的大小和协议，导致两个数据包的特征向量对同一特征具有不同的含义，这种不对齐可能会在重要特征的地方引入噪声而降低模型性能，同时也因为无法将每一位都映射到语义上而导致不可解释。</li></ul><p>从图1中不难看出，不同的网络协议（如 TCP 和 UDP）有着不同的数据表示方案，甚至相同的网络协议（如 IP）也不相同（是否包含 Options 选项），这显然无法满足上述统一化数据表示的需求。因此，研究人员结合语义表示法和朴素二进制表示法提出一种统一的网络数据包表示方法<strong>nPrint</strong>（图 2）。</p><p><img src="https://s2.loli.net/2022/04/06/wqXfR7yOADHzLxQ.png" alt="2.png"></p><p>​                                                                                    图2 nPrint</p><p>nPrint 使用每种协议允许的最大包头长度来表示该协议，同时将不同协议头部拼接组合成固定长度的包头。首先，它会保证任何数据包都可以被完整表示而不丢失任何信息；然后，使用内部填充确保每个数据包以相同数量的特征表示，并且每个特征具有相同含义，这种在位级上可解释的表示使我们能够更好的理解模型；其次，直接使用数据包的位，区分于某个位被设置为0，将不存在的包头用-1填充；最后，每个数据包都用相同数量的特征表示，对于给定的网络流量分析任务，将载荷设置为可选的字节数。此外，nPrint具有模块化和可扩展的特性，不仅可以将其他协议添加到表示中，也可以将一组数据包表示串联起来构建多包的nPrint指纹。</p><p>因此，nPrint 符合了4大性质：</p><ul><li>完整性：理论上可以包含所有协议</li><li>不变性：数据表征可以是一个确定的长度</li><li>归一性：数据被表示为 1&#x2F;0&#x2F;-1</li><li>一致性：不同数据包头的同一选项在同一位置</li></ul><h4 id="nPrintML"><a href="#nPrintML" class="headerlink" title="nPrintML"></a>nPrintML</h4><p>作者将 nPrint 与 <a href="https://arxiv.org/abs/2003.06505">AutoGluon-Tabular</a> 框架相结合，提出 nPrintML，实现了实现了机器学习流程的自动化（如图3所示）。</p><p><img src="https://s2.loli.net/2022/04/06/BqpVTEaQ8eo3gY4.png" alt="3.png"></p><p>​                                                                             图3 nPrintML</p><blockquote><p>AutoGluon背后技术：<a href="https://www.bilibili.com/video/BV1F84y1F7Ps?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1F84y1F7Ps?spm_id_from=333.999.0.0</a></p><p>AutoGluon在Windows下安装：<a href="https://www.bilibili.com/video/BV1yL4y177hH/?spm_id_from=333.788">https://www.bilibili.com/video/BV1yL4y177hH/?spm_id_from=333.788</a></p><p>论文：<a href="https://arxiv.org/abs/2003.06505">https://arxiv.org/abs/2003.06505</a> </p><p>文档：<a href="https://auto.gluon.ai/">https://auto.gluon.ai/</a> </p><p>代码：<a href="https://github.com/awslabs/autogluon">https://github.com/awslabs/autogluon</a></p></blockquote><h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h4 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h4><p>针对8个网络流量分析场景，图4展示了用nPrintML进行分析的案例研究，实验结果表明，nPrintML不仅可以解决不同场景的网络流量分析问题，并且具有相较于传统方法更好的性能。</p><p><img src="https://s2.loli.net/2022/04/06/uA3FM5Z7yNBGqLm.png" alt="4.png"></p><p>​                                                                                  图4 实验结果总览</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将机器学习应用于网络安全中的流量分析任务的有效性取决于特征的选择和适当的表示，即不超过模型本身。本文为自动流量分析创建了一个新方向，提出了 nPrint，这是一种统一的数据包表示，它将原始网络数据包作为输入，并将其转换为适合表示学习和模型训练的格式，从而使机器学习过程的一部分自动化到目前为止，这在很大程度上是艰苦的和手动的。这种标准格式可以轻松地将网络流量分析与最先进的自动机器学习 (AutoML) 管道集成。 nPrintML 是 nPrint 与 AutoML 的集成，可自动学习相应任务的最佳模型、参数设置和特征表示。本文作者们将 nPrintML 应用于八种常见的网络流量分析任务，在许多情况下改进了最新技术。 nPrint 已经证明，许多网络流量分类任务都可以自动化，尽管存在许多未解决的问题，例如涉及多个流的自动时间序列分析和分类。 nPrint 最终应该应用于更大的分类问题集。</p><h3 id="代码阅读及复现"><a href="#代码阅读及复现" class="headerlink" title="代码阅读及复现"></a>代码阅读及复现</h3><p>(过两天再做……)</p><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p>[1] Nick Erickson, Jonas Mueller, Alexander Shirkov, Hang Zhang, Pedro Larroy, Mu Li, and Alexander Smola. 2020. AutoGluon-Tabular: Robust and Accurate AutoML for Structured Data. arXiv preprint arXiv:2003.06505 (2020).</p><p>[2] Holland J , Schmitt P , Feamster N , et al. New Directions in Automated Traffic Analysis. 2021 ACMComputer and Communications Security Conference [C]. 2021.</p><p>[3] <a href="https://blog.csdn.net/WellShark/article/details/122192656">https://blog.csdn.net/WellShark/article/details/122192656</a></p><p>[4] <a href="https://mp.weixin.qq.com/s/Y8UenzDHP2WjiL3GZ4OLJg">https://mp.weixin.qq.com/s/Y8UenzDHP2WjiL3GZ4OLJg</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 论文学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> 论文 </tag>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 入侵检测 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python爬虫</title>
       <link href="/2022/04/06/python-crawler/"/>
       <url>/2022/04/06/python-crawler/</url>

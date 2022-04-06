@@ -6,7 +6,7 @@
   <link href="https://evolution957.github.io/atom.xml" rel="self"/>
   
   <link href="https://evolution957.github.io/"/>
-  <updated>2022-04-06T01:19:12.000Z</updated>
+  <updated>2022-04-06T12:22:11.000Z</updated>
   <id>https://evolution957.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Auto-Traffic-Analysis</title>
+    <link href="https://evolution957.github.io/2022/04/06/Auto-Traffic-Analysis/"/>
+    <id>https://evolution957.github.io/2022/04/06/Auto-Traffic-Analysis/</id>
+    <published>2022-04-06T12:22:11.000Z</published>
+    <updated>2022-04-06T12:22:11.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;New-Directions-in-Automated-Traffic-Analysis论文学习&quot;&gt;&lt;a href=&quot;#New-Directions-in-Automated-Traffic-Analysis论文学习&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="论文学习" scheme="https://evolution957.github.io/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://evolution957.github.io/tags/python/"/>
+    
+    <category term="论文" scheme="https://evolution957.github.io/tags/%E8%AE%BA%E6%96%87/"/>
+    
+    <category term="机器学习" scheme="https://evolution957.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="入侵检测" scheme="https://evolution957.github.io/tags/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>python爬虫</title>
