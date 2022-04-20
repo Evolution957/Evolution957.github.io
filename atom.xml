@@ -6,7 +6,7 @@
   <link href="https://evolution957.github.io/atom.xml" rel="self"/>
   
   <link href="https://evolution957.github.io/"/>
-  <updated>2022-04-06T12:22:11.000Z</updated>
+  <updated>2022-04-20T02:24:15.000Z</updated>
   <id>https://evolution957.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2022StarCTF-Misc-babyFL</title>
+    <link href="https://evolution957.github.io/2022/04/20/2022StarCTF-Misc-babyFL/"/>
+    <id>https://evolution957.github.io/2022/04/20/2022StarCTF-Misc-babyFL/</id>
+    <published>2022-04-20T02:24:15.000Z</published>
+    <updated>2022-04-20T02:24:15.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;2022-CTF-Misc-babyFL-WP（AI安全）&quot;&gt;&lt;a href=&quot;#2022-CTF-Misc-babyFL-WP（AI安全）&quot; class=&quot;headerlink&quot; title=&quot;2022 *CTF Misc babyFL</summary>
+        
+      
+    
+    
+    
+    <category term="CTF_Misc" scheme="https://evolution957.github.io/categories/CTF-Misc/"/>
+    
+    
+    <category term="python" scheme="https://evolution957.github.io/tags/python/"/>
+    
+    <category term="AI" scheme="https://evolution957.github.io/tags/AI/"/>
+    
+    <category term="Misc" scheme="https://evolution957.github.io/tags/Misc/"/>
+    
+    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
+    
+    <category term="2022*CTF" scheme="https://evolution957.github.io/tags/2022-CTF/"/>
+    
+  </entry>
   
   <entry>
     <title>Auto-Traffic-Analysis</title>
