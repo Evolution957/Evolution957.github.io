@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>upload-labs 刷题记录</title>
+      <link href="/2022/05/27/upload-labs/"/>
+      <url>/2022/05/27/upload-labs/</url>
+      
+        <content type="html"><![CDATA[<h1 id="upload-labs-刷题记录"><a href="#upload-labs-刷题记录" class="headerlink" title="upload-labs 刷题记录"></a>upload-labs 刷题记录</h1><blockquote><p>参考：</p><p><a href="https://mh-nexus.de/en/hxd/">HxD</a></p><p><a href="https://xz.aliyun.com/t/2657#toc-13">upload-labs之pass 16详细分析</a></p><p><a href="https://www.cnblogs.com/chu-jian/p/15515770.html">upload-labs通关攻略</a></p></blockquote><h2 id="Pass-01-js检查"><a href="#Pass-01-js检查" class="headerlink" title="Pass-01 js检查"></a>Pass-01 js检查</h2><p>前端验证图片格式，禁用<code>js</code>或者使用<code>burp</code>抓包修改后缀即可。</p><p><img src="https://img.gejiba.com/images/be4d8b59f055d5ad042387525c54bfa2.png" alt="be4d8b59f055d5ad042387525c54bfa2.png"></p><p>访问<code>http://127.0.0.1:8081/upload-labs/upload/phpinfo.php</code>即可查看信息。</p><h2 id="Pass-02-只验证content-type"><a href="#Pass-02-只验证content-type" class="headerlink" title="Pass-02 只验证content-type"></a>Pass-02 只验证content-type</h2><p>只验证了<code>content-type</code>类型，抓包修改即可</p><p><img src="https://img.gejiba.com/images/3bf4033c5b0d71b5c70903f7e787b8bb.png" alt="3bf4033c5b0d71b5c70903f7e787b8bb.png"></p><h2 id="Pass-03-黑名单绕过"><a href="#Pass-03-黑名单绕过" class="headerlink" title="Pass-03 黑名单绕过"></a>Pass-03 黑名单绕过</h2><p>采用黑名单机制，不允许上传<code>.asp,.aspx,.php,.jsp</code>后缀的文件，但可以上传<code>.phtml .phps .php5 .pht</code>，前提是<code>apache</code>的<code>httpd.conf</code>中有如下配置代码</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">AddType application/x-httpd-php .php .phtml .phps .php5 .pht</span><br></pre></td></tr></table></figure><p>上传后注意关注下文件存储位置和文件名</p><p><img src="https://img.gejiba.com/images/dc38b78d98fa42a507712c6e224bae50.png" alt="dc38b78d98fa42a507712c6e224bae50.png"></p><h2 id="Pass-04-htaccess绕过"><a href="#Pass-04-htaccess绕过" class="headerlink" title="Pass-04 .htaccess绕过"></a>Pass-04 .htaccess绕过</h2><p>禁止了一系列文件类型，但没有禁止<code>.htaccess</code>，不过该方法需要<code>mod_rewrite</code>模块开启且<code>AllowOverride All</code>。</p><p>上传一个<code>.htaccess</code>文件，内容为</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SetHandler application/x-httpd-php</span><br></pre></td></tr></table></figure><p><img src="https://img.gejiba.com/images/ba4a58067b6876052721825a87ac6fa2.png" alt="ba4a58067b6876052721825a87ac6fa2.png"></p><p>这样所有文件都会当成php文件来解析，所以此时再上传<code>phpinfo.jpg</code>并访问即可。</p><h2 id="Pass-05-点空格点绕过"><a href="#Pass-05-点空格点绕过" class="headerlink" title="Pass-05 点空格点绕过"></a>Pass-05 点空格点绕过</h2><p>后缀修改为<code>.php. .</code></p><h2 id="Pass-06-大小写绕过"><a href="#Pass-06-大小写绕过" class="headerlink" title="Pass-06 大小写绕过"></a>Pass-06 大小写绕过</h2><p>修改文件后缀为<code>.PHP</code>即可</p><h2 id="Pass-07-空格绕过"><a href="#Pass-07-空格绕过" class="headerlink" title="Pass-07 空格绕过"></a>Pass-07 空格绕过</h2><p>后缀最后加空格即可</p><h2 id="Pass-08-点绕过"><a href="#Pass-08-点绕过" class="headerlink" title="Pass-08 点绕过"></a>Pass-08 点绕过</h2><p>后缀加点即可<code>.php.</code></p><h2 id="Pass-09-DATA绕过"><a href="#Pass-09-DATA绕过" class="headerlink" title="Pass-09 ::$DATA绕过"></a>Pass-09 ::$DATA绕过</h2><p>在后缀加<code>::$DATA</code>即可</p><h2 id="Pass-10-点空格点绕过"><a href="#Pass-10-点空格点绕过" class="headerlink" title="Pass-10 点空格点绕过"></a>Pass-10 点空格点绕过</h2><p>同<code>Pass-05</code></p><h2 id="Pass-11-双写绕过"><a href="#Pass-11-双写绕过" class="headerlink" title="Pass-11 双写绕过"></a>Pass-11 双写绕过</h2><p>后缀改为<code>.pphphp</code></p><h2 id="Pass-12-00截断"><a href="#Pass-12-00截断" class="headerlink" title="Pass-12 %00截断"></a>Pass-12 %00截断</h2><p>抓包修改<code>save_path</code>参数</p><blockquote><p>php版本要小于5.3.4且magic_quotes_gpc为OFF状态</p></blockquote><h2 id="Pass-13-0x00截断"><a href="#Pass-13-0x00截断" class="headerlink" title="Pass-13 0x00截断"></a>Pass-13 0x00截断</h2><p>同<code>Pass-12</code>，只不过这里路径是POST请求，所以要抓包后修改Hex</p><h2 id="Pass-14-文件头检测"><a href="#Pass-14-文件头检测" class="headerlink" title="Pass-14 文件头检测"></a>Pass-14 文件头检测</h2><p>可以直接用<code>copy 14.jpg /b + 14.php /a webshell.jpg</code>生成图片马，然后直接上传。</p><p>上传后使用自带的<code>include.php</code>读取即可</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1:8081/upload-labs/include.php?file=./upload/6220220527081735.png</span><br></pre></td></tr></table></figure><h2 id="Pass-15-getimagesize检测"><a href="#Pass-15-getimagesize检测" class="headerlink" title="Pass-15 getimagesize检测"></a>Pass-15 getimagesize检测</h2><p>同<code>Pass-14</code></p><blockquote><p>getimagesize函数：对目标文件的16进制去进行一个读取，去读取头几个字符串是不是符合图片的要求的</p></blockquote><h2 id="Pass-16-exif-imagetype检测"><a href="#Pass-16-exif-imagetype检测" class="headerlink" title="Pass-16 exif_imagetype检测"></a>Pass-16 exif_imagetype检测</h2><p>同<code>Pass14</code>，但要打开<code>php_exif</code></p><blockquote><p>exif_imagetype函数：读取一个图像的第一个字节并检查其签名</p></blockquote><h2 id="Pass-17-二次渲染"><a href="#Pass-17-二次渲染" class="headerlink" title="Pass-17 二次渲染"></a>Pass-17 二次渲染</h2><p>用<a href="https://mh-nexus.de/en/hxd/">HxD</a>查看上传前后文件差异，看看哪个部分没有被修改，将php代码放到没有被更改的部分即可。</p><p>详细操作可见<a href="https://xz.aliyun.com/t/2657#toc-13">upload-labs之pass 16详细分析</a></p><blockquote><p>imagecreatefromjpeg函数：用于从JPEG文件或URL创建新图像，在此过程中可能会有信息丢失（如植入的php代码）</p></blockquote><h2 id="Pass-18-条件竞争"><a href="#Pass-18-条件竞争" class="headerlink" title="Pass-18 条件竞争"></a>Pass-18 条件竞争</h2><p>审计源码，发现后端是先将图片上传上去，才开始进行判断后缀名、二次渲染。如果我们在上传后但未验证的这一瞬间访问这个文件，那他就不能对这个文件删除、二次渲染。</p><p>用<code>burp</code>的<code>intruder</code>模块不停发送请求，然后不断刷新页面访问直到成功。</p><h2 id="Pass-19-后缀判断-二次渲染-条件竞争"><a href="#Pass-19-后缀判断-二次渲染-条件竞争" class="headerlink" title="Pass-19 后缀判断+二次渲染+条件竞争"></a>Pass-19 后缀判断+二次渲染+条件竞争</h2><p>上传图片马配合文件包含漏洞即可，其他同<code>Pass-18</code>。</p><h2 id="Pass-20-x2F-绕过"><a href="#Pass-20-x2F-绕过" class="headerlink" title="Pass-20 &#x2F;.绕过"></a>Pass-20 &#x2F;.绕过</h2><p><img src="https://img.gejiba.com/images/8b13cd552ce4213d4e01abcd454d87cc.png" alt="8b13cd552ce4213d4e01abcd454d87cc.png"></p><blockquote><p>move_uploaded_file()特性之一：忽略掉文件末尾的 &#x2F;.</p></blockquote><h2 id="Pass-21-数组绕过"><a href="#Pass-21-数组绕过" class="headerlink" title="Pass-21 数组绕过"></a>Pass-21 数组绕过</h2><p><img src="https://img.gejiba.com/images/ac64dfb6954cf795497815163ebe8c23.png" alt="ac64dfb6954cf795497815163ebe8c23.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF_Web </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> Web </tag>
+            
+            <tag> 文件上传 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sqli-labs 刷题记录</title>
       <link href="/2022/05/17/sqli-labs/"/>
       <url>/2022/05/17/sqli-labs/</url>

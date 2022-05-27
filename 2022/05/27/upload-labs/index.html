@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>upload-labs 刷题记录 | Evolution957's blog</title><meta name="keywords" content="CTF,Web,文件上传"><meta name="author" content="Evolution957"><meta name="copyright" content="Evolution957"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="upload-labs 刷题记录 参考： HxD upload-labs之pass 16详细分析 upload-labs通关攻略  Pass-01 js检查前端验证图片格式，禁用js或者使用burp抓包修改后缀即可。  访问http:&#x2F;&#x2F;127.0.0.1:8081&#x2F;upload-labs&#x2F;upload&#x2F;phpinfo.php即可查看信息。 Pass-02 只验证content-type只验证了c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="upload-labs 刷题记录">
+<meta property="og:url" content="https://evolution957.github.io/2022/05/27/upload-labs/index.html">
+<meta property="og:site_name" content="Evolution957&#39;s blog">
+<meta property="og:description" content="upload-labs 刷题记录 参考： HxD upload-labs之pass 16详细分析 upload-labs通关攻略  Pass-01 js检查前端验证图片格式，禁用js或者使用burp抓包修改后缀即可。  访问http:&#x2F;&#x2F;127.0.0.1:8081&#x2F;upload-labs&#x2F;upload&#x2F;phpinfo.php即可查看信息。 Pass-02 只验证content-type只验证了c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://evolution957.github.io/img/upload_labs.png">
+<meta property="article:published_time" content="2022-05-27T15:36:47.000Z">
+<meta property="article:modified_time" content="2022-05-27T15:36:47.000Z">
+<meta property="article:author" content="Evolution957">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="文件上传">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://evolution957.github.io/img/upload_labs.png"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="https://evolution957.github.io/2022/05/27/upload-labs/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'upload-labs 刷题记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-27 23:36:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/iconfont.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Evolution957's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/upload_labs.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Evolution957's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">upload-labs 刷题记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-27T15:36:47.000Z" title="发表于 2022-05-27 23:36:47">2022-05-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-27T15:36:47.000Z" title="更新于 2022-05-27 23:36:47">2022-05-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF-Web/">CTF_Web</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="upload-labs 刷题记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="upload-labs-刷题记录"><a href="#upload-labs-刷题记录" class="headerlink" title="upload-labs 刷题记录"></a>upload-labs 刷题记录</h1><blockquote>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://mh-nexus.de/en/hxd/">HxD</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2657#toc-13">upload-labs之pass 16详细分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chu-jian/p/15515770.html">upload-labs通关攻略</a></p>
+</blockquote>
+<h2 id="Pass-01-js检查"><a href="#Pass-01-js检查" class="headerlink" title="Pass-01 js检查"></a>Pass-01 js检查</h2><p>前端验证图片格式，禁用<code>js</code>或者使用<code>burp</code>抓包修改后缀即可。</p>
+<p><img src="https://img.gejiba.com/images/be4d8b59f055d5ad042387525c54bfa2.png" alt="be4d8b59f055d5ad042387525c54bfa2.png"></p>
+<p>访问<code>http://127.0.0.1:8081/upload-labs/upload/phpinfo.php</code>即可查看信息。</p>
+<h2 id="Pass-02-只验证content-type"><a href="#Pass-02-只验证content-type" class="headerlink" title="Pass-02 只验证content-type"></a>Pass-02 只验证content-type</h2><p>只验证了<code>content-type</code>类型，抓包修改即可</p>
+<p><img src="https://img.gejiba.com/images/3bf4033c5b0d71b5c70903f7e787b8bb.png" alt="3bf4033c5b0d71b5c70903f7e787b8bb.png"></p>
+<h2 id="Pass-03-黑名单绕过"><a href="#Pass-03-黑名单绕过" class="headerlink" title="Pass-03 黑名单绕过"></a>Pass-03 黑名单绕过</h2><p>采用黑名单机制，不允许上传<code>.asp,.aspx,.php,.jsp</code>后缀的文件，但可以上传<code>.phtml .phps .php5 .pht</code>，前提是<code>apache</code>的<code>httpd.conf</code>中有如下配置代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">AddType application/x-httpd-php .php .phtml .phps .php5 .pht</span><br></pre></td></tr></table></figure>
+
+<p>上传后注意关注下文件存储位置和文件名</p>
+<p><img src="https://img.gejiba.com/images/dc38b78d98fa42a507712c6e224bae50.png" alt="dc38b78d98fa42a507712c6e224bae50.png"></p>
+<h2 id="Pass-04-htaccess绕过"><a href="#Pass-04-htaccess绕过" class="headerlink" title="Pass-04 .htaccess绕过"></a>Pass-04 .htaccess绕过</h2><p>禁止了一系列文件类型，但没有禁止<code>.htaccess</code>，不过该方法需要<code>mod_rewrite</code>模块开启且<code>AllowOverride All</code>。</p>
+<p>上传一个<code>.htaccess</code>文件，内容为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SetHandler application/x-httpd-php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.gejiba.com/images/ba4a58067b6876052721825a87ac6fa2.png" alt="ba4a58067b6876052721825a87ac6fa2.png"></p>
+<p>这样所有文件都会当成php文件来解析，所以此时再上传<code>phpinfo.jpg</code>并访问即可。</p>
+<h2 id="Pass-05-点空格点绕过"><a href="#Pass-05-点空格点绕过" class="headerlink" title="Pass-05 点空格点绕过"></a>Pass-05 点空格点绕过</h2><p>后缀修改为<code>.php. .</code></p>
+<h2 id="Pass-06-大小写绕过"><a href="#Pass-06-大小写绕过" class="headerlink" title="Pass-06 大小写绕过"></a>Pass-06 大小写绕过</h2><p>修改文件后缀为<code>.PHP</code>即可</p>
+<h2 id="Pass-07-空格绕过"><a href="#Pass-07-空格绕过" class="headerlink" title="Pass-07 空格绕过"></a>Pass-07 空格绕过</h2><p>后缀最后加空格即可</p>
+<h2 id="Pass-08-点绕过"><a href="#Pass-08-点绕过" class="headerlink" title="Pass-08 点绕过"></a>Pass-08 点绕过</h2><p>后缀加点即可<code>.php.</code></p>
+<h2 id="Pass-09-DATA绕过"><a href="#Pass-09-DATA绕过" class="headerlink" title="Pass-09 ::$DATA绕过"></a>Pass-09 ::$DATA绕过</h2><p>在后缀加<code>::$DATA</code>即可</p>
+<h2 id="Pass-10-点空格点绕过"><a href="#Pass-10-点空格点绕过" class="headerlink" title="Pass-10 点空格点绕过"></a>Pass-10 点空格点绕过</h2><p>同<code>Pass-05</code></p>
+<h2 id="Pass-11-双写绕过"><a href="#Pass-11-双写绕过" class="headerlink" title="Pass-11 双写绕过"></a>Pass-11 双写绕过</h2><p>后缀改为<code>.pphphp</code></p>
+<h2 id="Pass-12-00截断"><a href="#Pass-12-00截断" class="headerlink" title="Pass-12 %00截断"></a>Pass-12 %00截断</h2><p>抓包修改<code>save_path</code>参数</p>
+<blockquote>
+<p>php版本要小于5.3.4且magic_quotes_gpc为OFF状态</p>
+</blockquote>
+<h2 id="Pass-13-0x00截断"><a href="#Pass-13-0x00截断" class="headerlink" title="Pass-13 0x00截断"></a>Pass-13 0x00截断</h2><p>同<code>Pass-12</code>，只不过这里路径是POST请求，所以要抓包后修改Hex</p>
+<h2 id="Pass-14-文件头检测"><a href="#Pass-14-文件头检测" class="headerlink" title="Pass-14 文件头检测"></a>Pass-14 文件头检测</h2><p>可以直接用<code>copy 14.jpg /b + 14.php /a webshell.jpg</code>生成图片马，然后直接上传。</p>
+<p>上传后使用自带的<code>include.php</code>读取即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1:8081/upload-labs/include.php?file=./upload/6220220527081735.png</span><br></pre></td></tr></table></figure>
+
+<h2 id="Pass-15-getimagesize检测"><a href="#Pass-15-getimagesize检测" class="headerlink" title="Pass-15 getimagesize检测"></a>Pass-15 getimagesize检测</h2><p>同<code>Pass-14</code></p>
+<blockquote>
+<p>getimagesize函数：对目标文件的16进制去进行一个读取，去读取头几个字符串是不是符合图片的要求的</p>
+</blockquote>
+<h2 id="Pass-16-exif-imagetype检测"><a href="#Pass-16-exif-imagetype检测" class="headerlink" title="Pass-16 exif_imagetype检测"></a>Pass-16 exif_imagetype检测</h2><p>同<code>Pass14</code>，但要打开<code>php_exif</code></p>
+<blockquote>
+<p>exif_imagetype函数：读取一个图像的第一个字节并检查其签名</p>
+</blockquote>
+<h2 id="Pass-17-二次渲染"><a href="#Pass-17-二次渲染" class="headerlink" title="Pass-17 二次渲染"></a>Pass-17 二次渲染</h2><p>用<a target="_blank" rel="noopener" href="https://mh-nexus.de/en/hxd/">HxD</a>查看上传前后文件差异，看看哪个部分没有被修改，将php代码放到没有被更改的部分即可。</p>
+<p>详细操作可见<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2657#toc-13">upload-labs之pass 16详细分析</a></p>
+<blockquote>
+<p>imagecreatefromjpeg函数：用于从JPEG文件或URL创建新图像，在此过程中可能会有信息丢失（如植入的php代码）</p>
+</blockquote>
+<h2 id="Pass-18-条件竞争"><a href="#Pass-18-条件竞争" class="headerlink" title="Pass-18 条件竞争"></a>Pass-18 条件竞争</h2><p>审计源码，发现后端是先将图片上传上去，才开始进行判断后缀名、二次渲染。如果我们在上传后但未验证的这一瞬间访问这个文件，那他就不能对这个文件删除、二次渲染。</p>
+<p>用<code>burp</code>的<code>intruder</code>模块不停发送请求，然后不断刷新页面访问直到成功。</p>
+<h2 id="Pass-19-后缀判断-二次渲染-条件竞争"><a href="#Pass-19-后缀判断-二次渲染-条件竞争" class="headerlink" title="Pass-19 后缀判断+二次渲染+条件竞争"></a>Pass-19 后缀判断+二次渲染+条件竞争</h2><p>上传图片马配合文件包含漏洞即可，其他同<code>Pass-18</code>。</p>
+<h2 id="Pass-20-x2F-绕过"><a href="#Pass-20-x2F-绕过" class="headerlink" title="Pass-20 &#x2F;.绕过"></a>Pass-20 &#x2F;.绕过</h2><p><img src="https://img.gejiba.com/images/8b13cd552ce4213d4e01abcd454d87cc.png" alt="8b13cd552ce4213d4e01abcd454d87cc.png"></p>
+<blockquote>
+<p>move_uploaded_file()特性之一：忽略掉文件末尾的 &#x2F;.</p>
+</blockquote>
+<h2 id="Pass-21-数组绕过"><a href="#Pass-21-数组绕过" class="headerlink" title="Pass-21 数组绕过"></a>Pass-21 数组绕过</h2><p><img src="https://img.gejiba.com/images/ac64dfb6954cf795497815163ebe8c23.png" alt="ac64dfb6954cf795497815163ebe8c23.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://evolution957.github.io/">Evolution957</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://evolution957.github.io/2022/05/27/upload-labs/">https://evolution957.github.io/2022/05/27/upload-labs/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://Evolution957.github.io" target="_blank">Evolution957's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/Web/">Web</a><a class="post-meta__tags" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">文件上传</a></div><div class="post_share"><div class="social-share" data-image="/img/upload_labs.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/17/sqli-labs/"><img class="next-cover" src="/img/sqli_labs.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">sqli-labs 刷题记录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/04/25/BugKu-Web2/" title="BugKu Web 刷题记录2"><img class="cover" src="/img/BugKu_Web2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-25</div><div class="title">BugKu Web 刷题记录2</div></div></a></div><div><a href="/2022/04/27/BugKu-Web3/" title="BugKu Web 刷题记录3"><img class="cover" src="/img/BugKu_Web3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-27</div><div class="title">BugKu Web 刷题记录3</div></div></a></div><div><a href="/2022/04/24/BugKu-Web1/" title="BugKu Web 刷题记录1"><img class="cover" src="/img/BugKu_Web1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-24</div><div class="title">BugKu Web 刷题记录1</div></div></a></div><div><a href="/2022/04/21/pikachu/" title="pikachu靶场刷题记录"><img class="cover" src="/img/pikachu.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-21</div><div class="title">pikachu靶场刷题记录</div></div></a></div><div><a href="/2022/05/05/BugKu-Web4/" title="BugKu Web 刷题记录 4"><img class="cover" src="/img/BugKu_Web4.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-05</div><div class="title">BugKu Web 刷题记录 4</div></div></a></div><div><a href="/2022/05/17/sqli-labs/" title="sqli-labs 刷题记录"><img class="cover" src="/img/sqli_labs.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-17</div><div class="title">sqli-labs 刷题记录</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#upload-labs-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">upload-labs 刷题记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-01-js%E6%A3%80%E6%9F%A5"><span class="toc-number">1.1.</span> <span class="toc-text">Pass-01 js检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-02-%E5%8F%AA%E9%AA%8C%E8%AF%81content-type"><span class="toc-number">1.2.</span> <span class="toc-text">Pass-02 只验证content-type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-03-%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87"><span class="toc-number">1.3.</span> <span class="toc-text">Pass-03 黑名单绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-04-htaccess%E7%BB%95%E8%BF%87"><span class="toc-number">1.4.</span> <span class="toc-text">Pass-04 .htaccess绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-05-%E7%82%B9%E7%A9%BA%E6%A0%BC%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-number">1.5.</span> <span class="toc-text">Pass-05 点空格点绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-06-%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-number">1.6.</span> <span class="toc-text">Pass-06 大小写绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-07-%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87"><span class="toc-number">1.7.</span> <span class="toc-text">Pass-07 空格绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-08-%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-number">1.8.</span> <span class="toc-text">Pass-08 点绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-09-DATA%E7%BB%95%E8%BF%87"><span class="toc-number">1.9.</span> <span class="toc-text">Pass-09 ::$DATA绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-10-%E7%82%B9%E7%A9%BA%E6%A0%BC%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-number">1.10.</span> <span class="toc-text">Pass-10 点空格点绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-11-%E5%8F%8C%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-number">1.11.</span> <span class="toc-text">Pass-11 双写绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-12-00%E6%88%AA%E6%96%AD"><span class="toc-number">1.12.</span> <span class="toc-text">Pass-12 %00截断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-13-0x00%E6%88%AA%E6%96%AD"><span class="toc-number">1.13.</span> <span class="toc-text">Pass-13 0x00截断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-14-%E6%96%87%E4%BB%B6%E5%A4%B4%E6%A3%80%E6%B5%8B"><span class="toc-number">1.14.</span> <span class="toc-text">Pass-14 文件头检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-15-getimagesize%E6%A3%80%E6%B5%8B"><span class="toc-number">1.15.</span> <span class="toc-text">Pass-15 getimagesize检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-16-exif-imagetype%E6%A3%80%E6%B5%8B"><span class="toc-number">1.16.</span> <span class="toc-text">Pass-16 exif_imagetype检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-17-%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93"><span class="toc-number">1.17.</span> <span class="toc-text">Pass-17 二次渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-18-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">1.18.</span> <span class="toc-text">Pass-18 条件竞争</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-19-%E5%90%8E%E7%BC%80%E5%88%A4%E6%96%AD-%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">1.19.</span> <span class="toc-text">Pass-19 后缀判断+二次渲染+条件竞争</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-20-x2F-%E7%BB%95%E8%BF%87"><span class="toc-number">1.20.</span> <span class="toc-text">Pass-20 &#x2F;.绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-21-%E6%95%B0%E7%BB%84%E7%BB%95%E8%BF%87"><span class="toc-number">1.21.</span> <span class="toc-text">Pass-21 数组绕过</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By Evolution957</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">岂能尽如人意，但求无愧我心</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
