@@ -6,7 +6,7 @@
   <link href="https://evolution957.github.io/atom.xml" rel="self"/>
   
   <link href="https://evolution957.github.io/"/>
-  <updated>2023-08-19T12:15:05.000Z</updated>
+  <updated>2023-08-22T12:53:28.000Z</updated>
   <id>https://evolution957.github.io/</id>
   
   <author>
@@ -17,7 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>buuctf-web3</title>
+    <title>Java反序列化学习</title>
+    <link href="https://evolution957.github.io/2023/08/22/java-unser/"/>
+    <id>https://evolution957.github.io/2023/08/22/java-unser/</id>
+    <published>2023-08-22T12:53:28.000Z</published>
+    <updated>2023-08-22T12:53:28.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Java反序列化学习&quot;&gt;&lt;a href=&quot;#Java反序列化学习&quot; class=&quot;headerlink&quot; title=&quot;Java反序列化学习&quot;&gt;&lt;/a&gt;Java反序列化学习&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
+    
+    
+    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
+    
+    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
+    
+    <category term="Java" scheme="https://evolution957.github.io/tags/Java/"/>
+    
+    <category term="CC链" scheme="https://evolution957.github.io/tags/CC%E9%93%BE/"/>
+    
+    <category term="2021东华杯" scheme="https://evolution957.github.io/tags/2021%E4%B8%9C%E5%8D%8E%E6%9D%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>buuctf Web 刷题记录 3</title>
     <link href="https://evolution957.github.io/2023/08/19/buuctf-web3/"/>
     <id>https://evolution957.github.io/2023/08/19/buuctf-web3/</id>
     <published>2023-08-19T12:15:05.000Z</published>
