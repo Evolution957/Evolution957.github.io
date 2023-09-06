@@ -6,7 +6,7 @@
   <link href="https://evolution957.github.io/atom.xml" rel="self"/>
   
   <link href="https://evolution957.github.io/"/>
-  <updated>2023-08-28T16:44:09.000Z</updated>
+  <updated>2023-09-06T10:44:27.000Z</updated>
   <id>https://evolution957.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RMI反序列化学习</title>
+    <link href="https://evolution957.github.io/2023/09/06/rmi-unser/"/>
+    <id>https://evolution957.github.io/2023/09/06/rmi-unser/</id>
+    <published>2023-09-06T10:44:27.000Z</published>
+    <updated>2023-09-06T10:44:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;RMI反序列化学习&quot;&gt;&lt;a href=&quot;#RMI反序列化学习&quot; class=&quot;headerlink&quot; title=&quot;RMI反序列化学习&quot;&gt;&lt;/a&gt;RMI反序列化学习&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
+    
+    
+    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
+    
+    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
+    
+    <category term="Java" scheme="https://evolution957.github.io/tags/Java/"/>
+    
+    <category term="RMI" scheme="https://evolution957.github.io/tags/RMI/"/>
+    
+  </entry>
   
   <entry>
     <title>Shiro反序列化学习</title>
@@ -580,39 +613,6 @@
     <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
     
     <category term="pikachu靶场" scheme="https://evolution957.github.io/tags/pikachu%E9%9D%B6%E5%9C%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2022StarCTF-Misc-babyFL</title>
-    <link href="https://evolution957.github.io/2022/04/20/2022StarCTF-Misc-babyFL/"/>
-    <id>https://evolution957.github.io/2022/04/20/2022StarCTF-Misc-babyFL/</id>
-    <published>2022-04-20T02:24:15.000Z</published>
-    <updated>2022-04-20T02:24:15.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;2022-CTF-Misc-babyFL-WP（AI安全）&quot;&gt;&lt;a href=&quot;#2022-CTF-Misc-babyFL-WP（AI安全）&quot; class=&quot;headerlink&quot; title=&quot;2022 *CTF Misc babyFL</summary>
-        
-      
-    
-    
-    
-    <category term="CTF_Misc" scheme="https://evolution957.github.io/categories/CTF-Misc/"/>
-    
-    
-    <category term="python" scheme="https://evolution957.github.io/tags/python/"/>
-    
-    <category term="AI" scheme="https://evolution957.github.io/tags/AI/"/>
-    
-    <category term="Misc" scheme="https://evolution957.github.io/tags/Misc/"/>
-    
-    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
-    
-    <category term="2022*CTF" scheme="https://evolution957.github.io/tags/2022-CTF/"/>
     
   </entry>
   
