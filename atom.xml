@@ -6,7 +6,7 @@
   <link href="https://evolution957.github.io/atom.xml" rel="self"/>
   
   <link href="https://evolution957.github.io/"/>
-  <updated>2023-09-06T10:44:27.000Z</updated>
+  <updated>2023-09-14T15:14:27.000Z</updated>
   <id>https://evolution957.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JNDI注入学习</title>
+    <link href="https://evolution957.github.io/2023/09/14/jndi-inject/"/>
+    <id>https://evolution957.github.io/2023/09/14/jndi-inject/</id>
+    <published>2023-09-14T15:14:27.000Z</published>
+    <updated>2023-09-14T15:14:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;JNDI注入学习&quot;&gt;&lt;a href=&quot;#JNDI注入学习&quot; class=&quot;headerlink&quot; title=&quot;JNDI注入学习&quot;&gt;&lt;/a&gt;JNDI注入学习&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
+    
+    
+    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
+    
+    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
+    
+    <category term="Java" scheme="https://evolution957.github.io/tags/Java/"/>
+    
+    <category term="JNDI" scheme="https://evolution957.github.io/tags/JNDI/"/>
+    
+  </entry>
   
   <entry>
     <title>RMI反序列化学习</title>
@@ -584,35 +617,6 @@
     <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
     
     <category term="BugKu" scheme="https://evolution957.github.io/tags/BugKu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>pikachu靶场刷题记录</title>
-    <link href="https://evolution957.github.io/2022/04/21/pikachu/"/>
-    <id>https://evolution957.github.io/2022/04/21/pikachu/</id>
-    <published>2022-04-21T11:31:34.000Z</published>
-    <updated>2022-04-21T11:31:34.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;CTF-Web-pikachu靶场记录&quot;&gt;&lt;a href=&quot;#CTF-Web-pikachu靶场记录&quot; class=&quot;headerlink&quot; title=&quot;CTF Web pikachu靶场记录&quot;&gt;&lt;/a&gt;CTF Web</summary>
-        
-      
-    
-    
-    
-    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
-    
-    
-    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
-    
-    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
-    
-    <category term="pikachu靶场" scheme="https://evolution957.github.io/tags/pikachu%E9%9D%B6%E5%9C%BA/"/>
     
   </entry>
   
