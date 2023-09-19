@@ -17,6 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>FastJson反序列化学习</title>
+    <link href="https://evolution957.github.io/2023/09/20/fastjson-unser/"/>
+    <id>https://evolution957.github.io/2023/09/20/fastjson-unser/</id>
+    <published>2023-09-19T17:45:42.000Z</published>
+    <updated>2023-09-14T15:14:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;FastJson反序列化学习&quot;&gt;&lt;a href=&quot;#FastJson反序列化学习&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
+    
+    
+    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
+    
+    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
+    
+    <category term="Java" scheme="https://evolution957.github.io/tags/Java/"/>
+    
+    <category term="FastJson" scheme="https://evolution957.github.io/tags/FastJson/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JNDI注入学习</title>
     <link href="https://evolution957.github.io/2023/09/14/jndi-inject/"/>
     <id>https://evolution957.github.io/2023/09/14/jndi-inject/</id>
@@ -575,35 +606,6 @@
         
         
     <summary type="html">&lt;h1 id=&quot;BugKu-Web-刷题记录2&quot;&gt;&lt;a href=&quot;#BugKu-Web-刷题记录2&quot; class=&quot;headerlink&quot; title=&quot;BugKu Web 刷题记录2&quot;&gt;&lt;/a&gt;BugKu Web</summary>
-        
-      
-    
-    
-    
-    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
-    
-    
-    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
-    
-    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
-    
-    <category term="BugKu" scheme="https://evolution957.github.io/tags/BugKu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BugKu Web 刷题记录1</title>
-    <link href="https://evolution957.github.io/2022/04/24/BugKu-Web1/"/>
-    <id>https://evolution957.github.io/2022/04/24/BugKu-Web1/</id>
-    <published>2022-04-24T08:30:27.000Z</published>
-    <updated>2022-04-24T08:30:27.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;BugKu-Web-刷题记录1&quot;&gt;&lt;a href=&quot;#BugKu-Web-刷题记录1&quot; class=&quot;headerlink&quot; title=&quot;BugKu Web 刷题记录1&quot;&gt;&lt;/a&gt;BugKu Web</summary>
         
       
     
