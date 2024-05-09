@@ -6,7 +6,7 @@
   <link href="https://evolution957.github.io/atom.xml" rel="self"/>
   
   <link href="https://evolution957.github.io/"/>
-  <updated>2023-09-14T15:14:27.000Z</updated>
+  <updated>2024-05-09T03:22:11.000Z</updated>
   <id>https://evolution957.github.io/</id>
   
   <author>
@@ -15,6 +15,67 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java表达式注入学习</title>
+    <link href="https://evolution957.github.io/2024/05/09/java-el/"/>
+    <id>https://evolution957.github.io/2024/05/09/java-el/</id>
+    <published>2024-05-09T03:22:11.000Z</published>
+    <updated>2024-05-09T03:22:11.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Java表达式注入学习&quot;&gt;&lt;a href=&quot;#Java表达式注入学习&quot; class=&quot;headerlink&quot; title=&quot;Java表达式注入学习&quot;&gt;&lt;/a&gt;Java表达式注入学习&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
+    
+    
+    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
+    
+    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
+    
+    <category term="Java" scheme="https://evolution957.github.io/tags/Java/"/>
+    
+    <category term="表达式注入" scheme="https://evolution957.github.io/tags/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux闯关游戏-Bandit</title>
+    <link href="https://evolution957.github.io/2024/03/25/linux-bandit/"/>
+    <id>https://evolution957.github.io/2024/03/25/linux-bandit/</id>
+    <published>2024-03-25T11:13:17.000Z</published>
+    <updated>2024-03-25T11:13:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Bandit&quot;&gt;&lt;a href=&quot;#Bandit&quot; class=&quot;headerlink&quot; title=&quot;Bandit&quot;&gt;&lt;/a&gt;Bandit&lt;/h1&gt;&lt;p&gt;科研生活太难顶了，做点小闯关游戏放松下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Linux" scheme="https://evolution957.github.io/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://evolution957.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>FastJson反序列化学习</title>
@@ -548,64 +609,6 @@
         
         
     <summary type="html">&lt;h1 id=&quot;BugKu-Web-刷题记录-4&quot;&gt;&lt;a href=&quot;#BugKu-Web-刷题记录-4&quot; class=&quot;headerlink&quot; title=&quot;BugKu Web 刷题记录 4&quot;&gt;&lt;/a&gt;BugKu Web 刷题记录</summary>
-        
-      
-    
-    
-    
-    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
-    
-    
-    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
-    
-    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
-    
-    <category term="BugKu" scheme="https://evolution957.github.io/tags/BugKu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BugKu Web 刷题记录3</title>
-    <link href="https://evolution957.github.io/2022/04/27/BugKu-Web3/"/>
-    <id>https://evolution957.github.io/2022/04/27/BugKu-Web3/</id>
-    <published>2022-04-27T15:38:08.000Z</published>
-    <updated>2022-04-27T15:38:08.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;BugKu-Web-刷题记录3&quot;&gt;&lt;a href=&quot;#BugKu-Web-刷题记录3&quot; class=&quot;headerlink&quot; title=&quot;BugKu Web 刷题记录3&quot;&gt;&lt;/a&gt;BugKu Web</summary>
-        
-      
-    
-    
-    
-    <category term="CTF_Web" scheme="https://evolution957.github.io/categories/CTF-Web/"/>
-    
-    
-    <category term="CTF" scheme="https://evolution957.github.io/tags/CTF/"/>
-    
-    <category term="Web" scheme="https://evolution957.github.io/tags/Web/"/>
-    
-    <category term="BugKu" scheme="https://evolution957.github.io/tags/BugKu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BugKu Web 刷题记录2</title>
-    <link href="https://evolution957.github.io/2022/04/25/BugKu-Web2/"/>
-    <id>https://evolution957.github.io/2022/04/25/BugKu-Web2/</id>
-    <published>2022-04-25T12:30:41.000Z</published>
-    <updated>2022-04-25T12:30:41.000Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;BugKu-Web-刷题记录2&quot;&gt;&lt;a href=&quot;#BugKu-Web-刷题记录2&quot; class=&quot;headerlink&quot; title=&quot;BugKu Web 刷题记录2&quot;&gt;&lt;/a&gt;BugKu Web</summary>
         
       
     
